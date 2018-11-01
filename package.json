@@ -1,0 +1,64 @@
+{
+  "name": "datocms-plugin-better-title",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development parcel src/index.html --port 1235  --cert localhost.crt --key localhost.key --out-dir .parceljs",
+    "build": "cross-env NODE_ENV=production parcel build src/index.html --out-dir dist --public-url ./ --no-source-maps"
+  },
+  "homepage": "https://github.com/cj/datocms-plugin-better-title",
+  "description": "A plugin that automatically concatenates multiple fields to use for your Title field.",
+  "keywords": [
+    "datocms",
+    "datocms-plugin",
+    "field-editor",
+    "title"
+  ],
+  "author": "CJ Lazell",
+  "license": "MIT",
+  "datoCmsPlugin": {
+    "title": "Better Title",
+    "coverImage": "docs/cover.png",
+    "entryPoint": "dist/index.html",
+    "fieldTypes": [
+      "string"
+    ],
+    "pluginType": "field_editor",
+    "parameters": {
+      "global": [
+        {
+          "id": "developmentMode",
+          "label": "Development mode?",
+          "type": "boolean",
+          "hint": "Enable development logs on the console"
+        }
+      ],
+      "instance": [
+        {
+          "id": "fields",
+          "label": "Fields to use",
+          "hint": "i.e. first_name,last_name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "id": "visible",
+          "label": "Make field visible?",
+          "type": "boolean",
+          "default": false
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "parcel-bundler": "^1.10.3"
+  },
+  "dependencies": {
+    "datocms-plugins-sdk": "0.0.7"
+  }
+}
