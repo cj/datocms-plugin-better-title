@@ -1,4 +1,3 @@
-
 const node = document.getElementById('root')
 
 // purely for html syntax highlighting (not needed) :)
