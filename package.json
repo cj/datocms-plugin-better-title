@@ -1,14 +1,13 @@
 {
   "name": "datocms-plugin-better-title",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "A plugin that automatically concatenates multiple fields to use for your Title field.",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development parcel src/index.html --port 1235  --cert localhost.crt --key localhost.key --out-dir .parceljs",
     "build": "cross-env NODE_ENV=production parcel build src/index.html --out-dir dist --public-url ./ --no-source-maps"
   },
   "homepage": "https://github.com/cj/datocms-plugin-better-title",
-  "description": "A plugin that automatically concatenates multiple fields to use for your Title field.",
   "keywords": [
     "datocms",
     "datocms-plugin",
@@ -32,6 +31,12 @@
           "label": "Development mode?",
           "type": "boolean",
           "hint": "Enable development logs on the console"
+        },
+        {
+          "id": "apiToken",
+          "label": "API token",
+          "type": "string",
+          "hint": "Please provide a READ-ONLY API token, so that we can get the Links field values."
         }
       ],
       "instance": [
@@ -44,7 +49,7 @@
         },
         {
           "id": "visible",
-          "label": "Make field visible?",
+          "label": "Visible?",
           "type": "boolean",
           "default": false
         }
@@ -52,6 +57,9 @@
     }
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",

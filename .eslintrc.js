@@ -4,9 +4,11 @@ module.exports = {
   env: {
     node: true,
     browser: true,
+    es6: true,
   },
 
-  global: {
+  globals: {
+    Dato: true,
     DatoCmsPlugin: true,
   },
 
@@ -14,9 +16,7 @@ module.exports = {
     'airbnb-base',
   ],
 
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
+  parser: "babel-eslint",
 
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -27,5 +27,7 @@ module.exports = {
     'comma-dangle': [2, 'always-multiline'],
 
     'no-return-assign': ['error', 'except-parens'],
+
+    'no-underscore-dangle': [2, { 'allowAfterThis': true }],
   },
 }
