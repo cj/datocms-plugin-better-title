@@ -8,10 +8,12 @@ export default class BetterTitle {
     this._plugin = plugin
     this._fieldPath = fieldPath
     this._client = new Dato.SiteClient(apiToken)
-    this._fields = fields.split(',').map(field => field.trim())
+    this._fields = fields.split(/(?<=(?:\w|\))),/).map(field => field.trim())
 
     plugin.toggleField(fieldPath, visible)
   }
+
+  static cleanValue = value => value.replace(/(:.+|\(.+)/g, '')
 
   get plugin() { return this._plugin }
 
@@ -22,17 +24,35 @@ export default class BetterTitle {
   get fields() { return this._fields }
 
   getFieldValue = async (field) => {
-    const { plugin, client } = this
+    const { cleanValue } = this.constructor
 
-    if (field.includes(':')) {
-      const [fieldPath, linkField] = field.split(':')
-      const itemId = plugin.getFieldValue(fieldPath)
-      const item = await client.items.find(itemId)
+    let fieldPath = field
+    let linkField
+    let fieldValue
 
-      return item[linkField]
+    const fieldReplace = fieldPath.match(/(?<=\()[^(].+(?=\))/gm)
+
+    if (fieldPath.match(/\w+:/)) {
+      [fieldPath, linkField] = field.split(':')
+      const itemId = this.plugin.getFieldValue(fieldPath)
+      const item = await this.client.items.find(itemId)
+
+      fieldValue = item[cleanValue(linkField)]
+    } else {
+      fieldValue = this.plugin.getFieldValue(cleanValue(field))
     }
 
-    return plugin.getFieldValue(field)
+    if (fieldReplace) {
+      const [regex, replaceValue] = fieldReplace[0]
+        .split(/(?<=(?<!\\)\/),(?=(?:\s+|)(?:'|"))/g)
+        .map(value => value.trim().slice(1, -1))
+
+      fieldValue = fieldValue
+        .toString()
+        .replace(new RegExp(regex, 'g'), replaceValue)
+    }
+
+    return fieldValue
   }
 
   async render() {

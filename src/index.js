@@ -22,5 +22,7 @@ DatoCmsPlugin.init((plugin) => {
 
   render()
 
-  betterTitle.fields.forEach(field => plugin.addFieldChangeListener(field.replace(/:.+/, ''), render))
+  betterTitle.fields
+    .map(field => BetterTitle.cleanValue(field))
+    .forEach(field => plugin.addFieldChangeListener(field, render))
 })
