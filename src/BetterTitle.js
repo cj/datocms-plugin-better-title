@@ -58,13 +58,21 @@ export default class BetterTitle {
   }
 
   findItemTypeValue = fields => async (fieldItem) => {
-    const { cleanValue, regexReplaceFieldValue } = this.constructor
-    const [linkName, linkField] = fieldItem.split(':')
-    const field = fields[linkName]
-    const link = field[linkField]
-    const item = await this.client.items.find(link)
-    const value = item[cleanValue(linkField)]
-    const fieldValue = regexReplaceFieldValue(linkField, value)
+    let fieldValue
+
+    // If the value is not available we want to return an empty variable
+    try {
+      const { cleanValue, regexReplaceFieldValue } = this.constructor
+      const [linkName, linkField] = fieldItem.split(':')
+      const field = fields[linkName]
+      const link = field[linkField]
+      const item = await this.client.items.find(link)
+      const value = item[cleanValue(linkField)]
+
+      fieldValue = regexReplaceFieldValue(linkField, value)
+    } catch {
+      fieldValue = ''
+    }
 
     return fieldValue
   }
