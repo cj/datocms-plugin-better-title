@@ -1,6 +1,6 @@
 {
   "name": "datocms-plugin-better-title",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A plugin that automatically concatenates multiple fields to use for your Title field.",
   "main": "index.js",
   "scripts": {

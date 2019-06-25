@@ -20,7 +20,7 @@ export default class BetterTitle {
     plugin.toggleField(fieldPath, visible)
   }
 
-  static cleanValue = value => value.replace(/(:.+|\(.+)/g, '')
+  static cleanValue = value => value.replace(/(:.+|\(.+)/g, '').trim()
 
   static regexReplaceFieldValue = (field, fieldValue) => {
     const fieldReplace = field.match(/(?!:)(?<=\()[^(].+(?=\))/gm)
@@ -34,6 +34,7 @@ export default class BetterTitle {
     const newFieldValue = fieldValue
       .toString()
       .replace(new RegExp(regex, 'g'), replaceValue)
+      .trim()
 
     return newFieldValue
   }
@@ -104,7 +105,7 @@ export default class BetterTitle {
 
       fieldValue = (
         await Promise.all(fieldsToUse.map(this.findItemTypeValue(fields)))
-      ).join(' ')
+      ).join(' ').trim()
     } else if (field.match(/\w+:/)) {
       fieldValue = await this.findItemValue(field)
     } else {
