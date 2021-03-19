@@ -9,8 +9,7 @@ A plugin that automatically concatenates multiple fields to use for your Title f
 3. Click install
 
 ## Setup
-1. Make a dedicated API token
-![](./make-api-key.jpg)
+1. Take a copy of your Read-only API token
 
 2. Apply the token
 ![](./apply-api-key.jpg)
