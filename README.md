@@ -8,4 +8,21 @@ A plugin that automatically concatenates multiple fields to use for your Title f
 2. Search for the "datocms-plugin-better-title" plugin
 3. Click install
 
+## Setup
+1. Make a dedicated API token
+![]('make-api-key.jpg')
+
+2. Apply the token
+![]('apply-api-key.jpg')
+
+## Example Use
+Find or create a Single-line string record
+![]('locate-single-line-string.png')
+
+Navigate to the Presentation tab and set the "Field Editor" to "Better Title".
+![]('access-better-title.jpg')
+
+Access sibling records using field name and ':' to access sub-properties. 
+![]('example-fields.png')
+
 For more detailed info, head over to the [DatoCMS documentation page](https://www.datocms.com/docs/plugins/install/).
